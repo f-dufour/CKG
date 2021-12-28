@@ -1,4 +1,5 @@
-pandas==0.24.2
+Cython
+pandas
 Flask==1.0.3
 passlib==1.7.1
 neo4j==4.2.0
@@ -11,14 +12,14 @@ rarfile==3.1
 dash==1.2.0
 redis>=3.2.1
 matplotlib>=3.1.1
-scipy==1.4.1
+scipy==1.7.1
 cyjupyter==0.2.0
 pyvis==0.1.7.0
 tzlocal==1.5.1
 webweb==0.0.37
 beautifulsoup4==4.7.1
 sklearn==0.0
-statsmodels==0.10.0
+statsmodels==0.13.1
 umap-learn>=0.3.9
 pingouin>=0.3.10
 python-louvain==0.13
@@ -35,12 +36,13 @@ dash_cytoscape>=0.1.1
 networkx==2.5
 chart-studio==1.0.0
 xhtml2pdf==0.2.4
-lxml==4.3.4
+lxml==4.7.1
 celery==5.0.5
 cffi>=1.14.0
 rpy2==3.0.5; platform_system!="Windows"
-h5py==2.10.0
+h5py==3.6.0
 jupyter>=1.0.0
+jupyterhub>=1.4.2
 xlrd==1.2.0
 openpyxl==3.0.1
 bcrypt==3.1.7
@@ -56,3 +58,4 @@ rst2pdf==0.98
 nbsphinx>=0.8.0
 ipykernel>=5.4.3
 eventlet==0.25.1
+uWSGI>=2.0.20

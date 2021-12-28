@@ -1,0 +1,49 @@
+version: '3'
+ 
+services:
+
+  ## ----------- ##
+  ## THE CKG APP ##
+  ## ----------- ##
+
+  ckg-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.ckg
+    container_name: ckg-app
+    hostname: ckg
+    restart: unless-stopped
+    depends_on: 
+      - ckg-db
+    ports:
+      - 8050:8050 # The CKG web UI
+      - 8090:8090 # The Jupyter hub
+    volumes:
+      - /tmp/ckg/app/data/:/CKG/data  # The data folder with ...
+      - /tmp/ckg/app/log:/CKG/log     # graphdb_builder graphdb_connector report_manager analytics_factory
+    networks:
+      - ckg
+
+  ## ---------------------- ##
+  ## THE CKG GRAPH DATABASE ##
+  ## ---------------------- ##
+
+  ckg-db:
+    build:
+      context: .
+      dockerfile: Dockerfile.neo4j
+    container_name: ckg-db
+    hostname: neo4j
+    restart: unless-stopped
+    environment:
+      - NEO4J_AUTH=none # Do not leave none in production
+    ports:
+      - 7687:7687 # The DB
+      - 7474:7474 # The web UI
+    volumes:
+      - /tmp/ckg/db/data/:/data
+    networks:
+      - ckg
+
+networks:
+  ckg:

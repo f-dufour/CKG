@@ -1,0 +1,20 @@
+FROM neo4j:4.2.3
+
+LABEL maintainer  = "Alberto Santos <alberto.santos@sund.ku.dk>"
+LABEL contributor = "Florent Dufour <florent@lrz.de>"
+
+ARG GDS_VERSION=1.5.1
+ARG APOC_VERSION=4.2.0.4
+
+# User management
+RUN rm -f /var/lib/neo4j/data/dbms/auth \
+    && neo4j-admin set-initial-password "NeO4J"
+
+# Plugins
+RUN wget -P /var/lib/neo4j/plugins https://github.com/neo4j/graph-data-science/releases/download/${GDS_VERSION}/neo4j-graph-data-science-${GDS_VERSION}.jar \
+    && wget -P /var/lib/neo4j/plugins https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/${APOC_VERSION}/apoc-${APOC_VERSION}-all.jar
+
+# Configuration
+COPY /resources/neo4j_db/neo4j.conf  /etc/neo4j/.
+
+EXPOSE 7474 7687
